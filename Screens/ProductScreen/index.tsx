@@ -14,16 +14,16 @@ const ProductScreen: React.FC<IProductScreenProps> = ({
   navigation,
 }) => {
   return (
-    <View>
-      <Text>ProductScreen</Text>
+    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         numColumns={2}
         data={products}
         renderItem={({ item }) => (
           <ProductCard
+            image={item.image}
             name={item.name}
             price={item.price}
-            description={item.description}
             onpress={() => {
               console.log("Product added to cart.", item);
               addItemCheckout(item);

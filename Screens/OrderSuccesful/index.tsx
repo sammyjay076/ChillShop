@@ -1,10 +1,28 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+import { CheckoutCard, OrderCard } from "../../components";
 
-const OrderSuccessScreen: React.FC = () => {
+interface IOrderSuccessScreenProps {
+  successOrderItems: any;
+  setOrderItems: any;
+}
+const OrderSuccessScreen: React.FC<IOrderSuccessScreenProps> = ({
+  successOrderItems,
+  setOrderItems,
+}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Order Successful!</Text>
+      <View style={{ marginBottom: 20, marginTop: 10 }}>
+        <Text style={styles.text}>
+          Order placed successfully for the following products
+        </Text>
+      </View>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        data={successOrderItems}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <OrderCard item={item} />}
+      />
     </View>
   );
 };
@@ -16,8 +34,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: "bold",
+    textAlign: "center",
   },
 });
 

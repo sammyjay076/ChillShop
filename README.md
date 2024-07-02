@@ -31,7 +31,7 @@ expo start
 **5. Project structure:**
 #App.js: The main entry point of the app.
 
-#screens/: Directory containing the app screens
+#Screens/: Directory containing the app screens
 
 #components/: Direcotry containing the various components in the app.
 

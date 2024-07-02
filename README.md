@@ -15,6 +15,7 @@ A simple shop app built with React Native and Expo, featuring bottom navigation,
 
 In Terminal run: 
 git clone https://github.com/sammyjay076/ChillShop.git
+
 cd ChillShop
 
 **2. Install dependencies**

@@ -1,4 +1,4 @@
-# ShopApp
+# ChillShop
 
 A simple shop app built with React Native and Expo, featuring bottom navigation, a product list, and checkout functionality without using third-party libraries.
 
@@ -14,5 +14,6 @@ A simple shop app built with React Native and Expo, featuring bottom navigation,
 1. **Clone the repository:**
 
 ```bash
-git clone https://github.com/sammyjay076/ShopApp.git
+git clone [https://github.com/sammyjay076/ShopApp.git](https://github.com/sammyjay076/ChillShop)
+
 cd ShopApp

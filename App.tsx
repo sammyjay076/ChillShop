@@ -5,6 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Checkout, ProductScreen } from "./Screens";
 import OrderSuccessScreen from "./Screens/OrderSuccesful";
+import Icon from "react-native-vector-icons/Entypo";
+import Icon2 from "react-native-vector-icons/MaterialIcons";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -16,16 +18,31 @@ export default function App() {
     setCheckoutItems([...checkoutItems, item]);
   };
 
+  const [orderItems, setOrderItems] = useState([]);
+
+  const addOrderItem = (item) => {
+    setOrderItems([...orderItems, item]);
+  };
+
   const removeItemFromCheckout = (item) => {
     setCheckoutItems(checkoutItems.filter((i) => i !== item));
   };
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Main" options={{ headerShown: false }}>
+        <Stack.Screen name="Home" options={{ headerShown: false }}>
           {() => (
             <Tab.Navigator>
-              <Tab.Screen name="Products">
+              <Tab.Screen
+                options={{
+                  tabBarLabel: "Product",
+                  lazy: true,
+                  tabBarIcon: ({ color, size }) => (
+                    <Icon name="shop" size={30} color="#0D0D0E" />
+                  ),
+                }}
+                name="Products"
+              >
                 {(props) => (
                   <ProductScreen
                     {...props}
@@ -33,20 +50,45 @@ export default function App() {
                   />
                 )}
               </Tab.Screen>
-              <Tab.Screen name="Checkout">
+              <Tab.Screen
+                options={{
+                  tabBarLabel: "Checkout",
+                  lazy: true,
+                  tabBarIcon: ({ color, size }) => (
+                    <Icon2
+                      name="shopping-cart-checkout"
+                      size={30}
+                      color="#0D0D0E"
+                    />
+                  ),
+                }}
+                name="Checkout"
+              >
                 {(props) => (
                   <Checkout
                     {...props}
                     checkoutItems={checkoutItems}
                     removeItemFromCheckout={removeItemFromCheckout}
                     setCheckoutItems={setCheckoutItems}
+                    setOrderItems={setOrderItems}
+                    addOrderItem={addOrderItem}
                   />
                 )}
               </Tab.Screen>
             </Tab.Navigator>
           )}
         </Stack.Screen>
-        <Stack.Screen name="OrderSuccess" component={OrderSuccessScreen} />
+        <Stack.Screen name="OrderSuccess">
+          {(props) => {
+            return (
+              <OrderSuccessScreen
+                setOrderItems={setOrderItems}
+                successOrderItems={orderItems}
+                {...props}
+              />
+            );
+          }}
+        </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
   );
